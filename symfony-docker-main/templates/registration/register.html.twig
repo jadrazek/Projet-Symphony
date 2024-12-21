@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block body %}
+    <h1>Créer un compte</h1>
+
+    {# Affichage des erreurs globaux du formulaire #}
+    {% if form_errors(registrationForm) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm) }}
+        </div>
+    {% endif %}
+
+    {# Démarrage du formulaire #}
+    {{ form_start(registrationForm, { 'attr': { 'class': 'form-register' } }) }}
+
+        {# Champ pour l'adresse e-mail #}
+        <div class="form-group">
+            {{ form_label(registrationForm.email, 'Adresse e-mail') }}
+            {{ form_widget(registrationForm.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Entrez votre e-mail' } }) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+
+        {# Champ pour le mot de passe #}
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+            {{ form_widget(registrationForm.plainPassword, { 'attr': { 'class': 'form-control', 'placeholder': 'Choisissez un mot de passe sécurisé' } }) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+
+        {# Case à cocher pour accepter les termes #}
+        <div class="form-group">
+            <label>
+                {{ form_widget(registrationForm.agreeTerms) }}
+                J'accepte les <a href="/terms" target="_blank">termes et conditions</a>
+            </label>
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        {# Bouton d'envoi #}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </div>
+
+    {{ form_end(registrationForm) }}
+{% endblock %}
